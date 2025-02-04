@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "freddy",
+  "version": "1.0",
+  "description": "Freddy",
+  "action": {
+    "default_icon": "ficon.png",
+    "default_popup": "popup.html",
+    "default_title": "Open React App"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://test-analytics.freshcmdb.com/*",
+        "https://support.freshdesk.com/",
+        "https://cdn.jsdelivr.net/*"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "freddy/dist/*",
+        "vite.svg",
+        "styles.css",
+        "public/mathjax-config.js",
+        "public/mathjax/es5/tex-mml-chtml.js",
+        "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs"
+  ]
+}
